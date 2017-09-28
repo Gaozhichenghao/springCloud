@@ -1,0 +1,57 @@
+1.注册中心(eureka)    -----调通
+eureka-server：注册中心服务，其他提供者和消费者会把服务注入到注册中心；
+
+2.两种远程接口调用及添加熔断      ----- 调通
+ribbon（负载均衡）+restTemplate远程接口调用+Hystrix（熔断器）（ribbon是一个负载均衡客户端，可以很好的控制http和tcp的一些行为。Feign默认集成了ribbon。）
+service-ribbon： 远程接口的提供者，即Provider
+client-ribbon：restTemplate调用远程接口，同时开启熔断机制
+项目demo基本配置帮助手册：http://blog.csdn.net/forezp/article/details/69788938
+spring RestTemplate用法详解：http://blog.csdn.net/wwwihpccn/article/details/30496089
+spring RestTemplate实现权限配置：http://blog.csdn.net/wangkang80/article/details/73163038
+ 
+Feign远程接口调用及Feign Hystrix  -----调通
+reservation-FeignClient:远程接口的提供者，即Provider
+reservation-FeignConsumer:spring cloud Feign方式调用远程接口，同时开启并且设置Feign熔断器机制
+项目demo基本配置帮助手册：http://blog.csdn.net/forezp/article/details/69808079
+
+3.路由网关(zuul)（Zuul的主要功能是路由转发和过滤器。路由功能是微服务的一部分，比如／api/user转发到到user服务，/api/shop转发到到shop服务。zuul默认和Ribbon结合实现了负载均衡的功能。）
+ service-zuul简单配置请求转发功能（路由过滤未添加）  -----调通
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/69939114 
+
+4.普通分布式远程配置文件获取(spring cloud config)  -----调通
+config-server:配置访问远程仓库服务
+config-client：通过config-server拿取远程仓库配置文件信息
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70037291
+
+5.高可用分布式远程配置文件获取(spring cloud config)
+修改4中的部分配置，将config-server和config-client都注入到注册中心, demo启动必须先启动config-server
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70037513
+
+6.消息总线(spring Cloud Bus) 
+spring Cloud Bus 将分布式的节点用轻量的消息代理连接起来。它可以用于广播配置文件的更改或者服务之间的通讯，也可以用于监控.
+这里讲的是用Spring Cloud Bus实现通知微服务架构的配置文件的更改(里面配置了spring.rabbitmq)
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70148235
+
+7.服务链路追踪(Spring Cloud Sleuth)
+server-zipkin    调用记录中间工程
+service-hi       服务及消费
+service-miya      服务及消费
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70162074
+
+8.高可用的服务注册中心
+ 修改注册表中的访问路径为多个
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70183572
+
+9.docker部署spring cloud项目
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70198649
+
+10. 断路器监控(Hystrix Dashboard)配置单个服务中  -----调通
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70217283
+
+11.断路器聚合监控(Hystrix Turbine)
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70233227
+
+12.服务注册(consul)
+项目demo基本配置帮助手册:http://blog.csdn.net/forezp/article/details/70245644
+
+13.
